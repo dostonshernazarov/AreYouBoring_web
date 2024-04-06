@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+import "user_service/user.proto";
+package user;
+
+service UserService {
+    rpc Create(User) returns (User);
+    rpc GetUser(GetUserRequest) returns (User);
+    rpc GetAllUsers(GetAllUsersRequest) returns (GetAllUsersResponse);
+}

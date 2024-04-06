@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOT_BORING</A></title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #bdb1b1;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 12px 30px;
+            background-color: #007bff;
+            color: rgb(0, 0, 0);
+            border: none;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #response {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #eee8e8;
+            color: rgb(11, 13, 34);
+            font-size: 30px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Styles for different message types */
+        .success {
+            color: #28a745;
+        }
+
+        .warning {
+            color: #ffc107;
+        }
+
+        .error {
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ARE YOU BORING? :(</h1>
+        <button onclick="getData()">CLICK...</button>
+        <div id="response"></div>
+    </div>
+
+    <script>
+        function getData() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "http://localhost:8080/v1/activity", true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        var responseData = JSON.parse(xhr.responseText);
+                        var resultDiv = document.getElementById("response");
+                        resultDiv.innerText = responseData.response;
+                        if (responseData.response === "message from api") {
+                            resultDiv.classList.remove("warning", "error");
+                            resultDiv.classList.add("success");
+                        } else {
+                            resultDiv.classList.remove("success");
+                            resultDiv.classList.add("error");
+                        }
+                    } else {
+                        document.getElementById("response").innerText = "Error fetching data from the server.";
+                    }
+                }
+            };
+            xhr.send();
+        }
+    </script>
+</body>
+</html>

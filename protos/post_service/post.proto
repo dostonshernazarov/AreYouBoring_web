@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package post;
+
+message Post {
+    int64 id = 1;
+    int64 owner_id = 2;
+    string name = 3;
+    string created_at = 4;
+    string description = 5;
+}
+
+message GetPostRequest {
+    int64 id = 1;
+}

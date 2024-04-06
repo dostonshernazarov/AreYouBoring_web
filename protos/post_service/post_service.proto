@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+import "post_service/post.proto";
+package post;
+
+service PostService {
+    rpc Create(Post) returns (Post);
+    rpc Get(GetPostRequest) returns (Post);
+}

@@ -1,0 +1,51 @@
+definitions:
+  models.BoredRes:
+    properties:
+      activity:
+        type: string
+    type: object
+  models.Error:
+    properties:
+      message:
+        type: string
+    type: object
+  models.StandardErrorModel:
+    properties:
+      error:
+        $ref: '#/definitions/models.Error'
+    type: object
+info:
+  contact: {}
+  title: NOT-BORED
+  version: "0.1"
+paths:
+  /v1/activity:
+    get:
+      consumes:
+      - application/json
+      description: Api for getting random activity
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.BoredRes'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.StandardErrorModel'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.StandardErrorModel'
+      summary: GetActivity
+      tags:
+      - bored
+securityDefinitions:
+  BearerAuth:
+    description: A tag service API in Go using Gin framework
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
