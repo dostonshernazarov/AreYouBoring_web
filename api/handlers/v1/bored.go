@@ -28,7 +28,6 @@ func (h *handlerV1) GetActivity(c *gin.Context) {
 	var jspbMarshal protojson.MarshalOptions
 	jspbMarshal.UseProtoNames = true
 
-
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*time.Duration(h.cfg.CtxTimeout))
 	defer cancel()
 
@@ -39,7 +38,7 @@ func (h *handlerV1) GetActivity(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": err.Error(),
 		})
-		h.log.Error("failed to get user", l.Error(err))
+		h.log.Error("failed to get tip", l.Error(err))
 		return
 	}
 
